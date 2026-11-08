@@ -139,6 +139,24 @@ export async function POST(request) {
       );
     }
 
+    // 과제 추가 검증사항 - 내 vercel production 주소 검증
+
+    const requestHost = (
+      request.headers.get("x-forwarded-host") ?? new URL(request.url).host
+    ).toLowerCase();
+
+    if (parsedUrl.host.toLowerCase() === requestHost) {
+      return NextResponse.json(
+        {
+          error: {
+            code: "INVALID_URL",
+            message: "Cannot shorten a URL of this service.",
+          },
+        },
+        { status: 400 },
+      );
+    }
+
     /*
      * 6. Short URL 생성
      *
