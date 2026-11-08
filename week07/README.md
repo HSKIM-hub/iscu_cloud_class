@@ -85,21 +85,21 @@ proxy.js
 프로젝트/
 ├─ app/
 │  ├─ admin/
-│  │  └─ page.js                 
+│  │  └─ page.js
 │  └─ api/
 │     ├─ shorten/
-│     │  └─ route.js             
+│     │  └─ route.js
 │     └─ stats/
-│        └─ route.js             
+│        └─ route.js
 │
 ├─ lib/
-│  ├─ db.js                      
-│  ├─ stats.js                   
+│  ├─ db.js
+│  ├─ stats.js
 │  ├─ auth.js                    ← 제공 파일
 │  └─ authorization.js           ← 제공 파일
 │
 ├─ proxy.js                      ← 제공 파일
-└─ .env.local                    
+└─ .env.local
 ```
 
 ---
@@ -155,9 +155,9 @@ admin
   └─ stats:read
 ```
 
-| 권한 | 의미 |
-|---|---|
-| `admin:page` | `/admin` 화면 접근 |
+| 권한         | 의미                   |
+| ------------ | ---------------------- |
+| `admin:page` | `/admin` 화면 접근     |
 | `stats:read` | `/api/stats` 통계 조회 |
 
 현재 실습에서는 관리자 계정 하나만 사용합니다. 실제 사용자 관리 시스템을 만드는 것이 아니라 **인증과 인가의 책임을 코드에서도 구분하는 것**이 목적입니다.
@@ -197,8 +197,7 @@ const isValidAdmin = false;
 
 ```js
 const isValidAdmin =
-  username === "admin" &&
-  password === process.env.ADMIN_PASSWORD;
+  username === "admin" && password === process.env.ADMIN_PASSWORD;
 ```
 
 이 코드는 두 조건을 모두 확인합니다.
@@ -654,11 +653,11 @@ Vercel Firewall Rate Limit
 초과 → 429 Too Many Requests
 ```
 
-| 보호 수단 | 확인하는 질문 | 적용 대상 |
-|---|---|---|
-| 인증 | 이 사용자는 누구인가? | 관리자 요청 |
-| 인가 | 이 사용자가 이 기능을 사용해도 되는가? | `/admin`, `/api/stats` |
-| Rate Limit | 너무 많은 요청을 보내고 있는가? | `/api/shorten` |
+| 보호 수단  | 확인하는 질문                          | 적용 대상              |
+| ---------- | -------------------------------------- | ---------------------- |
+| 인증       | 이 사용자는 누구인가?                  | 관리자 요청            |
+| 인가       | 이 사용자가 이 기능을 사용해도 되는가? | `/admin`, `/api/stats` |
+| Rate Limit | 너무 많은 요청을 보내고 있는가?        | `/api/shorten`         |
 
 ---
 
